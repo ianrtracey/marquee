@@ -1,11 +1,20 @@
-require 'sinatra'
-require 'sinatra/activerecord'
-require './environments'
+require './database'
 
-class Repo < ActiveRecord::Base
+class Model
+  include Database
 end
 
-# class that is used in the response to the dashboard
-class Activity
-  attr_accessor :total_commits, :total_additions, :recent_commiters
+class EventMessage < Model
+  attr_accessor :contents
+
+  def initialize(contents)
+    @contents = contents
+  end
+
+  def owner
+  end
+
+  def repo
+  end
+
 end

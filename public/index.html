@@ -4,12 +4,13 @@
 <head>
   <meta charset="utf-8">
 
-  <title>The HTML5 Herald</title>
+  <title>Marquee</title>
   <meta name="description" content="The HTML5 Herald">
   <meta name="author" content="SitePoint">
 
   <link rel="stylesheet" href="kube.css">
   <link rel="stylesheet" href="css/odometer-theme-default.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
@@ -17,8 +18,28 @@
 </head>
 
 <body>
-<div id="odometer" class="odometer">0</div>
+  <div class="row centered" style="width:100%">
+    <div class="col col-7">
+    <h1>Lines of Code Written</h1>
+    <div id="odometer" class="odometer">0</div>
+    </div>
+    <div class="col col-5">
+      dfsfdf
+    </div>
+  </div>
+  <div class="row">
+     <div class="col col-7">
+        <h2>Number of Commits</h2>
+        <h2>134</h2>
+     </div>
+  </div>
+  <div class="row centered">
+    <div class="col col-7">
+      <canvas id="languageChart" width="400" height="400"></canvas>
+    </div>
+  </div>
   <script src="js/odometer.js"></script>
+  <script src="js/Chart.js"></script>
   <script>
 setTimeout(function(){
     odometer.innerHTML = 456;
@@ -28,6 +49,34 @@ setTimeout(function(){
 setTimeout(function(){
     odometer.innerHTML = 2786;
 }, 4000);
+</script>
+<script>
+var data = {
+    labels: [
+        "Red",
+        "Blue",
+        "Yellow"
+    ],
+    datasets: [
+        {
+            data: [300, 50, 100],
+            backgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ],
+            hoverBackgroundColor: [
+                "#FF6384",
+                "#36A2EB",
+                "#FFCE56"
+            ]
+        }]
+};
+// var ctx = document.getElementById("languageChart");
+// var myDoughnutChart = new Chart(ctx, {
+//     type: 'doughnut',
+//     data: data,
+// });
 </script>
 </body>
 </html>
