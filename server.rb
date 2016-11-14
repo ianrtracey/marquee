@@ -21,7 +21,7 @@ end
 post '/payload' do
   # TODO: sercure this endpoint using https://developer.github.com/webhooks/securing/
   push_event = request.body.read
-  logger.info "EVENT: #{push_event}"
+  puts "EVENT: #{push_event}"
   event_queue.enqueue(push_event)
   return "OK"
 end
