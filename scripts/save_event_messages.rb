@@ -5,8 +5,8 @@ def save_message(msg)
   puts "saving message"
   client = Mongo::Client.new('mongodb://127.0.0.1:27017/marquee')
   collection = client[:eventmessage]
-  collection.insert_one(msg)
-  result.n
+  result = collection.insert_one({:contents => msg})
+  puts result.n
 end
 
 worker = Worker.new('push_events')

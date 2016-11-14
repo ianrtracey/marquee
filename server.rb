@@ -4,7 +4,7 @@ require_relative './queue/event_queue.rb'
 require_relative './environments'
 
 begin
-  event_queue = EventQueue.new('push_events')
+  event_queue = EventQueue.new("push_events")
 rescue
   puts "cannot connect to EventQueue"
 end
