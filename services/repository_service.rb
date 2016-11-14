@@ -5,10 +5,9 @@ class RepositoryService
   base_uri 'https://api.github.com'
 
   def initialize(owner, repo)
-    @repo = repo
     @owner = owner
+    @repo = repo
   end
-
 
   def stats
     self.class.get("/repos/#{@owner}/#{@repo}/stats/contributors")
