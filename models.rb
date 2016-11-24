@@ -12,9 +12,21 @@ class EventMessage < Model
   end
 
   def owner
+    @contents[:repository][:owner]
   end
 
   def repo
+    @contents[:repository]
   end
 
+end
+
+
+class Repository < Mode
+  attr_accessor :stats, :languages
+
+  def initialize(stats=nil, languages=nil)
+    @stats = stats
+    @languages = languages
+  end
 end

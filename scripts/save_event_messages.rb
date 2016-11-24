@@ -1,4 +1,5 @@
 require './queue/worker'
+require './queue/event_queue'
 require 'mongo'
 require 'json'
 
@@ -9,6 +10,10 @@ def save_message(msg)
   collection = client[:eventmessage]
   result = collection.insert_one(doc)
   puts result.n
+end
+
+def send_message_to_processor(msg)
+  puts "sending message to processor"
 end
 
 worker = Worker.new('push_events')
