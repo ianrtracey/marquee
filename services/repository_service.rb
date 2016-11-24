@@ -1,13 +1,10 @@
 require 'httparty'
-require './utils/service_tools.rb'
+require_relative './service'
 
-class RepositoryService
+class RepositoryService < Service
   include HTTParty
-  extend  ServiceTools
 
   base_uri 'https://api.github.com'
-
-  request_to_hash :languages
 
   def initialize(owner=nil, repo=nil)
     @owner = owner
@@ -21,5 +18,4 @@ class RepositoryService
   def languages
     self.class.get("/repos/#{@owner}/#{@repo}/languages")
   end
-
 end

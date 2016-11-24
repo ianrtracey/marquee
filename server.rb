@@ -26,6 +26,6 @@ post '/payload' do
   # saves event - just in case
   event_queue.enqueue(push_event)
   # process repo stats
-  repo_update_queue(push_event)
+  repo_update_queue.enqueue(push_event)
   return "OK"
 end

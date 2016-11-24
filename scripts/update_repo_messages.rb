@@ -5,7 +5,7 @@ require 'mongo'
 require 'json'
 
 def update_repo_stats(msg)
-  puts "saving message"
+  puts "updating repos"
   parsed_event_message = JSON.parse(msg)
   event_message = EventMessage.new(parsed_event_message)
   owner = event_message.owner
@@ -20,9 +20,6 @@ def update_repo_stats(msg)
   puts result.n
 end
 
-def send_message_to_processor(msg)
-  puts "sending message to processor"
-end
 
 worker = Worker.new('repo_update_events')
 worker.set_callback(method(:update_repo_stats))
