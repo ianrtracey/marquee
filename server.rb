@@ -8,12 +8,12 @@ begin
   repo_update_queue = EventQueue.new("repo_update_events")
 rescue
   puts "cannot connect to EventQueue"
+  exit 1
 end
 
 set :public_folder, 'public'
 set :static, true
 
-# Github webhook endpoint
 get '/' do
   File.read(File.join('public', 'index.html'))
 end
