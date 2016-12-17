@@ -1,2 +1,2 @@
-require './server'
-run Sinatra::Application
+require './app/webhook_server'
+run WebhookServer
