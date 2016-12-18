@@ -25,12 +25,8 @@ class Service
 
   def request(action)
     self.class.before_request_actions.each { |callback| send(callback) }
-    send(action)
-    self.class.after_request_actions.each { |callback| send(callback) }
+    res = send(action)
+    self.class.after_request_actions.each { |callback| send(callback(res)) }
   end
 
-  def get(action)
-    response = send(action)
-    JSON.parse(response.body)
-  end
 end
