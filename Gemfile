@@ -9,6 +9,8 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'httparty'
 gem 'mongo'
+gem 'mongo_mapper'
+gem 'bson_ext'
 
 group :development do
   gem 'tux'
