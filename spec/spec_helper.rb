@@ -5,6 +5,9 @@ require './app/models/Repository'
 require './app/services/repository_service'
 require './app/webhook_server'
 
+require './workers/webhook_event_worker'
+require './queue/event_queue'
+
 RSpec.configure do |config|
 
 

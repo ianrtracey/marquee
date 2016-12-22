@@ -9,7 +9,7 @@ RSpec.describe Repository do
   end
 
   describe "persistence" do
-    it "can save repository data" do
+    it "can save repository stats data" do
       incoming_event_message = get_raw_e
       expect(Repository.count).to eq(0)
       webhook_event = WebhookEvent.new(:contents => incoming_event_message)
@@ -19,11 +19,10 @@ RSpec.describe Repository do
       repo_service = RepositoryService.new(repository.owner, repository.name)
       repository.stats = repo_service.stats
       repository.languages = {}
-      binding.pry
-      repository.webhook_events << webhook_event
       repository.save
+      binding.pry
       expect(Repository.count).to eq(1)
-
+      expect(Repository.first.stats.keys.size).to_not eq(0)
     end
   end
 end

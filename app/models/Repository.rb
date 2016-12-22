@@ -13,7 +13,7 @@ class Repository
   attr_accessor :owner, :name, :languages, :stats
 end
 
-
+# currently not used
 class Commit
   include Mongoid::Document
   embedded_in :repository
