@@ -1,6 +1,8 @@
 require 'json'
 require './queue/worker'
+require './config/environment'
 require  './app/models/Repository'
+require  './app/models/WebhookEvent'
 require './app/services/repository_service'
 
 class WebhookEventWorker < Worker
@@ -12,13 +14,14 @@ class WebhookEventWorker < Worker
   def create_or_update_repo(msg)
     puts "creating or updating repo"
     doc = JSON.parse(msg)
-    event_message = EventMessage.new(doc)
+    event_message = WebhookEvent.new(:contents => doc)
     owner = event_message.owner
     repo = event_message.repo
+    puts "#{owner} #{repo}"
     repository_service = RepositoryService.new(owner, repo)
 
-    repository = Repository.where(owner: owner, repo: repo)
-      if repository.exist?
+    repository = Repository.where(owner: owner, name: repo)
+      if repository.exists?
         stats = repository_service.stats
         repository.update(stats: stats)
       else
@@ -31,5 +34,9 @@ class WebhookEventWorker < Worker
     puts "starting WebhookEventWorker"
     super
   end
-
 end
+
+webhook_event_worker = WebhookEventWorker.new
+webhook_event_worker.observe
+
+

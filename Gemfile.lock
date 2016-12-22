@@ -21,6 +21,7 @@ GEM
     coderay (1.1.1)
     concurrent-ruby (1.0.3)
     diff-lcs (1.2.5)
+    god (0.13.7)
     httparty (0.14.0)
       multi_xml (>= 0.5.2)
     i18n (0.7.0)
@@ -88,6 +89,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bunny
+  god
   httparty
   mongo
   mongoid

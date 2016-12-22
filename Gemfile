@@ -10,6 +10,7 @@ gem 'rake'
 gem 'httparty'
 gem 'mongo'
 gem 'mongoid'
+gem 'god'
 
 group :development do
   gem 'tux'
