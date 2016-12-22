@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 # A sample Gemfile
-source "http://rubygems.org"
+source "https://rubygems.org"
 
 gem 'bunny'
 gem 'sinatra'
@@ -9,11 +9,11 @@ gem 'sinatra-activerecord'
 gem 'rake'
 gem 'httparty'
 gem 'mongo'
-gem 'mongo_mapper'
-gem 'bson_ext'
+gem 'mongoid'
 
 group :development do
   gem 'tux'
+  gem 'pry'
 end
 
 group :test do

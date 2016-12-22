@@ -1,21 +1,23 @@
-require_relative './WebhookEvent'
-
 class Repository
-  include MongoMapper::Document
-  many :webhook_events
-  many :commits
+  include Mongoid::Document
+  include Mongoid::Timestamps::Created
+  include Mongoid::Timestamps::Updated
+  has_many :webhook_events
+  embeds_many :commits
 
-  key :owner, String
-  key :name, String
-  key :languages, Object
-  key :stats, Object
-  timestamps!
+  field :owner, type: String
+  field :name, type: String
+  field :languages, type: Hash
+  field :stats, type: Hash
+
+  attr_accessor :owner, :name, :languages, :stats
 end
 
 
-class Commits
-  include MongoMapper::EmbeddedDocument
+class Commit
+  include Mongoid::Document
+  embedded_in :repository
 
-  key :total, Integer
-  key :weeks, Array
+  field :total, type: Integer
+  field :weeks, type: Array
 end

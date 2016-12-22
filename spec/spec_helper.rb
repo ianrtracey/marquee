@@ -1,16 +1,22 @@
-ENV['RACK_ENV'] = 'test'
-
 require "./config/environment"
 
-require './app/models/event_message'
+require './app/models/WebhookEvent'
+require './app/models/Repository'
 require './app/services/repository_service'
 require './app/webhook_server'
 
 RSpec.configure do |config|
-  config.include Rack::Test::Methods
+
 
   config.before(:each) do
     $db = []
+  end
+
+  config.before do
+  end
+
+  config.after do
+    Mongoid.purge!
   end
 
   config.expect_with :rspec do |expectations|
