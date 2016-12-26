@@ -22,9 +22,12 @@ class WebhookEventWorker < Worker
 
     repository = Repository.where(owner: owner, name: repo)
       if repository.exists?
+        puts "found existing repo"
         stats = repository_service.stats
         repository.update(stats: stats)
       else
+        puts "new repo"
+        binding.pry
         stats = repository_service.stats
         Repository.create(:owner => owner, :name => repo, :stats => stats)
       end

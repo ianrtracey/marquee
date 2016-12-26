@@ -5,21 +5,16 @@ require './app/models/Repository'
 require './app/services/repository_service'
 require './app/webhook_server'
 
-require './workers/webhook_event_worker'
 require './queue/event_queue'
 
 RSpec.configure do |config|
 
 
   config.before(:each) do
-    $db = []
+    Mongoid.purge!
   end
 
   config.before do
-  end
-
-  config.after do
-    Mongoid.purge!
   end
 
   config.expect_with :rspec do |expectations|

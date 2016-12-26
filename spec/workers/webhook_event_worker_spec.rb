@@ -9,7 +9,7 @@ RSpec.describe WebhookEventWorker do
 
 
   describe "worker responding to incoming webhook events" do
-    it "can save the associated repo information from a webhook event" do
+    xit "can save the associated repo information from a webhook event" do
       expect(Repository.count).to eq(0)
       webhook_event_worker = WebhookEventWorker.new
       msg = get_webhook_event

@@ -1,6 +1,6 @@
 class WebhookEvent
   include Mongoid::Document
-  belongs_to :respository
+  belongs_to :repository
 
   field :contents, type: Hash
 
