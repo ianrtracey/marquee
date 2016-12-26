@@ -19,18 +19,13 @@ class WebhookEventWorker < Worker
     repo = event_message.repo
     puts "#{owner} #{repo}"
     repository_service = RepositoryService.new(owner, repo)
-
-    repository = Repository.where(owner: owner, name: repo)
-      if repository.exists?
-        puts "found existing repo"
-        stats = repository_service.stats
-        repository.update(stats: stats)
-      else
-        puts "new repo"
-        binding.pry
-        stats = repository_service.stats
-        Repository.create(:owner => owner, :name => repo, :stats => stats)
-      end
+    repository = Repository.find_or_create_by(:owner => owner, :name => repo)
+    repository.languages = repository_service.languages
+    stats = repository_service.stats
+    commit_stat = CommitStat.new(:total => stats["total"], :weeks => stats["weeks"])
+    repository.commit_stat = commit_stat
+    repository << event_message
+    repository.save
   end
 
   def observe

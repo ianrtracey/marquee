@@ -22,8 +22,8 @@ RSpec.describe Repository do
       repository.webhook_events << webhook_event
       repository.save
       expect(Repository.count).to eq(1)
-      binding.pry
       repository = Repository.last
+      binding.pry
       expect(repository.name).to eq("marquee")
       expect(repository.owner).to eq("ianrtracey")
       expect(repository.webhook_events.size).to eq(1)
