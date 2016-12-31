@@ -24,7 +24,7 @@ class WebhookEventWorker < Worker
     stats = repository_service.stats
     commit_stat = CommitStat.new(:total => stats["total"], :weeks => stats["weeks"])
     repository.commit_stat = commit_stat
-    repository << event_message
+    repository.webhook_events << event_message
     repository.save
   end
 

@@ -27,4 +27,7 @@ class CommitStat
       sum
     end
   end
+  def num_commits
+    self.total
+  end
 end
