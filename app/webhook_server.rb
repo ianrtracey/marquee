@@ -27,4 +27,5 @@ class WebhookServer < Sinatra::Base
     $event_queue.enqueue(push_event)
     return "OK"
   end
+
 end
