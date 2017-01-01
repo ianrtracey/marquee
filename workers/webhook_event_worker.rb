@@ -22,6 +22,7 @@ class WebhookEventWorker < Worker
     repository = Repository.find_or_create_by(:owner => owner, :name => repo)
     repository.languages = repository_service.languages
     stats = repository_service.stats
+
     commit_stat = CommitStat.new(:total => stats["total"], :weeks => stats["weeks"])
     repository.commit_stat = commit_stat
     repository.webhook_events << event_message

@@ -15,6 +15,7 @@ gem 'god'
 group :development do
   gem 'tux'
   gem 'pry'
+  gem 'sinatra-cross_origin'
 end
 
 group :test do
