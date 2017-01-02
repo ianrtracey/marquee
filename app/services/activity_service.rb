@@ -6,8 +6,13 @@ class ActivityService
     num_commits = 0
     lines_code = 0
     Repository.all.each do |repo|
-      lines_code += repo.commit_stat.total_lines
-      num_commits += repo.commit_stat.num_commits
+      if repo.commit_stat.nil?
+        lines_code += 0
+        num_commits += 0
+      else
+        lines_code += repo.commit_stat.total_lines
+        num_commits += repo.commit_stat.num_commits
+      end
     end
     result[:num_repos] = Repository.count
     result[:lines_code] = lines_code
