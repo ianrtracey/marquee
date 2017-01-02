@@ -15,6 +15,7 @@ class WebhookEventWorker < Worker
     puts "creating or updating repo"
     doc = JSON.parse(msg)
     event_message = WebhookEvent.new(:contents => doc)
+    p event_message
     owner = event_message.owner
     repo = event_message.repo
     puts "#{owner} #{repo}"
