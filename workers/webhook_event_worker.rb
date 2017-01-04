@@ -18,14 +18,15 @@ class WebhookEventWorker < Worker
     p event_message
     owner = event_message.owner
     repo = event_message.repo
-    puts "#{owner} #{repo}"
     repository_service = RepositoryService.new(owner, repo)
     repository = Repository.find_or_create_by(:owner => owner, :name => repo)
-    repository.languages = repository_service.languages
-    stats = repository_service.stats
+    if not event_message.ping_event?
+      repository.languages = repository_service.languages
+      stats = repository_service.stats
 
-    commit_stat = CommitStat.new(:total => stats["total"], :weeks => stats["weeks"])
-    repository.commit_stat = commit_stat
+      commit_stat = CommitStat.new(:total => stats["total"], :weeks => stats["weeks"])
+      repository.commit_stat = commit_stat
+    end
     repository.webhook_events << event_message
     repository.save
   end

@@ -42,6 +42,7 @@ class RepositoryService < Service
 
   def languages
     begin
+      string ="/repos/#{@owner}/#{@repo}/languages#{@auth}"
       resp = self.class.get("/repos/#{@owner}/#{@repo}/languages#{@auth}")
       if resp.code != 200 || resp.parsed_response.nil?
         raise RepositoryServiceError

@@ -19,4 +19,8 @@ class ActivityService
     result[:num_commits] = num_commits
     result
   end
+
+  def self.get_recent_n_commiters(n)
+    Repository.where(:commit_stat.ne => nil).order_by(:updated_at => :desc).limit(n).to_a
+  end
 end
