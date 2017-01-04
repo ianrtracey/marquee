@@ -15,6 +15,8 @@ end
 # currently not used
 class CommitStat
   include Mongoid::Document
+  include Mongoid::Timestamps::Created
+  include Mongoid::Timestamps::Updated
   embedded_in :repository
 
   field :total, type: Integer

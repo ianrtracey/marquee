@@ -3,6 +3,7 @@ require 'json'
 require 'logger'
 require './queue/event_queue'
 require './app/services/activity_service'
+require './app/services/language_service'
 require './config/environment'
 
 begin
@@ -51,6 +52,14 @@ class WebhookServer < Sinatra::Base
       unless repo.commit_stat.nil?
         {:repo => repo.attributes, :commits => repo.commit_stat.attributes}
       end
+    end
+    return JSON.dump(result)
+  end
+
+  get '/languages' do
+    top_languages = LanguageService.get_top_n_languages(10)
+    result = top_languages.map do |entry|
+      { :language => entry[0], :num_bytes => entry[1] }
     end
     return JSON.dump(result)
   end
