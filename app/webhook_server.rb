@@ -5,6 +5,7 @@ require './queue/event_queue'
 require './app/services/activity_service'
 require './app/services/language_service'
 require './config/environment'
+require './app/models/meta'
 
 begin
   $event_queue = EventQueue.new("webhooks")
@@ -48,6 +49,16 @@ class WebhookServer < Sinatra::Base
   # currently defautlts to 10 but API should be extensible to select the amount they want to return
   get '/commiters' do
     repos = ActivityService.get_recent_n_commiters(10)
+    result = repos.map do |repo|
+      unless repo.commit_stat.nil?
+        {:repo => repo.attributes, :commits => repo.commit_stat.attributes}
+      end
+    end
+    return JSON.dump(result)
+  end
+
+  get '/commiters/updates' do
+    repos = ActivityService.get_commiter_updates
     result = repos.map do |repo|
       unless repo.commit_stat.nil?
         {:repo => repo.attributes, :commits => repo.commit_stat.attributes}
